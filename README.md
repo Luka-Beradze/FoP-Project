@@ -5,4 +5,4 @@ Repository for the University project
 - Luka Beradze
 - Giorgi Kveliashvili
 - Tsotne Tsutskiridze
-- 
+- Ana Kakhidze
