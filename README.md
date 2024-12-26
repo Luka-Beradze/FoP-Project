@@ -1,2 +1,2 @@
 # FoP-Project
-Repository for the univeristy project
+Repository for the University project
