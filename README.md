@@ -7,7 +7,8 @@ Repository for the University project
 - Tsotne Tsutskiridze
 - Ana Kakhidze
 
-##__first steps:__
+__first steps:__
+
 group have came to an agreement of how they would implement rubby interpreter.
 we created basic base for our interpreter, with the use of **regex** in java.
 we also decided that tester woulld be able to write ruby code in a .txt file, and then program would read it.
