@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -6,6 +7,7 @@ import java.util.ArrayList;
 
 public class Main { 
     public static void main(String[] args) {
+        
         String input = "n = 10\n" + 
                         "sum = 0\n" + 
                         "i = 1\n" + 
@@ -14,28 +16,27 @@ public class Main {
                         "  sum += i\n" + 
                         "  i += 1\n" + 
                         "end";
-        ArrayList<String> lines;
+
+        Scanner scanner = new Scanner(input);
         
-        for (String i : ) {
-            
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            System.out.println(Statement.getStatement(line));
         }
 
-        lines.forEach(l -> {
-            System.out.println(Statement.getStatement(l));
-        });
     }
 }
 
 enum Statement {
     
-    ASSIGNMENT("(\\w+ *=\\w+)"),
+    ASSIGNMENT("\\w+ \\s*(=|-=|\\+=|%)\\s*\\w+"),
     IF("if +(\\w+|\\d+) *(< |> |== |<= |>= |!= ) *(\\w+|\\d+)"),
     ELSE("else"),
     WHILE("while +(\\w+|\\d+) *(< |> |== |<= |>= |!= ) *(\\w+|\\d+)"),
+    END("end"),
     CONDITION(".*(==|!=|<=|>=|<|>).*"),
     PRINT("puts +(\\w+|\\d+)"),
-    SPACE(" +"),
-    EOF("");
+    BLANK(" *");
 
     private final Pattern pattern;
 
