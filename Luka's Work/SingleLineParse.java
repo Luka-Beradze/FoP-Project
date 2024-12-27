@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class singleLineParse {
+
+    //main difference here is the use of the "if" statements, instead of regex match method
     public enum TokenType {
         //types of tokens (elements of code)
         NUMBER, IDENTIFIER, KEYWORD, OPERATOR, DELIMITER, WHITESPACE, EOF
