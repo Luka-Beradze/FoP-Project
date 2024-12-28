@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Interpreter {
 
@@ -71,5 +74,76 @@ public class Interpreter {
                     break;
             }
         }
+    }
+}
+
+
+
+
+enum Statement {
+
+    ASSIGNMENT("([a-z_][a-zA-Z0-9_]*)\\s*(\\+=|-=|\\*=|\\/=|=|%=|=)\\s*(\\d+|true|false|[a-z_][a-zA-Z0-9_]*)$"),
+    // ASSIGNMENT Group 1: Variable Name; Group 2: Operator; Group 3: Variable Value;
+    IF("if .*"),
+    ELSE("else"),
+    WHILE("while \\s*(" + Helper.CONDITION.getPattern().toString() + ")\\s*$"),
+    FOR("for .*"),
+    END("end"),
+    PRINT("puts ([a-z_][a-zA-Z0-9_]*|\\d+)$"),
+    // PRINT Group 1: item to print out;
+    SCOPE("  .*"),
+    EMPTY("");
+
+    private final Pattern pattern;
+
+    Statement(String regex) {
+        this.pattern = Pattern.compile(regex);
+    }
+
+    public Pattern getPattern() {
+        return pattern;
+    }
+
+    public boolean matches(String code) {
+        return pattern.matcher(code).find();
+    }
+
+    public static boolean addToStack(String code_line) {
+        if (getStatement(code_line) == ASSIGNMENT ||
+                getStatement(code_line) == IF ||
+                getStatement(code_line) == WHILE ||
+                getStatement(code_line) == FOR ||
+                getStatement(code_line) == PRINT ||
+                getStatement(code_line) == END) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static Statement getStatement(String code_line) {
+        for (Statement s : values()) {
+            if (Pattern.matches(s.pattern.toString(), code_line)) {
+                return s;
+            }
+        }
+        return null;
+    }
+}
+
+enum Helper {
+
+    CONDITION("([a-z_][a-zA-Z0-9_]*|\\d+)\\s*(==|!=|<=|>=|<|>)\\s*([a-z_][a-zA-Z0-9_]*|\\d+)$|true|false|[a-z_][a-zA-Z0-9_]*"),// Does not contain "!" before a condition
+    // CONDITION Group 1: left operand; Group 2: comparator; Group 3: right operand.
+    ASSIGNMENT_HELPER("\\+=|-=|\\*=|\\/=|=|%=|=");
+
+    private final Pattern pattern;
+
+    Helper(String regex) {
+        this.pattern = Pattern.compile(regex);
+    }
+
+    public Pattern getPattern() {
+        return pattern;
     }
 }
