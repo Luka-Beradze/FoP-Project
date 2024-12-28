@@ -1,0 +1,13 @@
+n = 10
+a = 0
+b = 1
+count = 1
+
+while count < n
+  temp = b
+  b = a + b
+  a = temp
+  count += 1
+end
+
+puts a
