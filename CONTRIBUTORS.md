@@ -9,7 +9,7 @@ On the way, each of us made fixes and minor changes to Interpreter code to ensur
 2. Giorgi Kveliashvili:  
    ruby implementations of 10 test algorithms.  
    Initial blueprint and implementation of interpreter memory system and runAlgorithm() method.
-3. Tsotne Tsutskiridze:
-   
+3. Tsotne Tsutskiridze:  
+   Implemented createWhileLoop class and methods to run ruby's while loop.
 4. Ana Kakhidze:  
    Implemented runPrint() method to run ruby's "puts" function.
