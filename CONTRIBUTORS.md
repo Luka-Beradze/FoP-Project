@@ -6,10 +6,10 @@ On the way, each of us made fixes and minor changes to Interpreter code to ensur
 
 1. Luka Beradze:  
    Implementation of parseKeyValuePair() method, which ensures compound assigment operators are handled correctly.
-3. Giorgi Kveliashvili:  
+2. Giorgi Kveliashvili:  
    ruby implementations of 10 test algorithms.  
    Initial blueprint and implementation of interpreter memory system and runAlgorithm() method.
-5. Tsotne Tsutskiridze:
+3. Tsotne Tsutskiridze:
    
-7. Ana Kakhidze:
-   
+4. Ana Kakhidze:  
+   Implemented runPrint() method to run ruby's "puts" function.
