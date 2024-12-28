@@ -72,32 +72,53 @@ public class Interpreter {
                 case EMPTY:
                     currentRunningStack.pop();
                     break;
-                }
-            }
-        }
-    public static void parseKeyValuePair(String code_line, Map<String, Object> currentVariableMap) {
-            Matcher matcher = Statement.ASSIGNMENT.getPattern().matcher(code_line);
-            if (matcher.find()) {
-                String key = matcher.group(1);
-                String operator = matcher.group(2);
-                Object value;
-     
-                // Assign value
-                try {
-                    value = Long.valueOf(matcher.group(3));
-                } catch (NumberFormatException e) {
-                    // if variable, assign its value
-                    if (currentVariableMap.containsKey(matcher.group(3))) {
-                        value = currentVariableMap.get(matcher.group(3));
-                    } else {
-                        // else boolean; Only false or true reaches this point.
-                        value = Boolean.valueOf(matcher.group(3));
-                    }
-                } else {
-                System.out.println("Could not parseKeyValuePair"); // might make this throw an exception later
             }
         }
     }
+
+
+    public static void parseKeyValuePair(String code_line, Map<String, Object> currentVariableMap) {
+        Matcher matcher = Statement.ASSIGNMENT.getPattern().matcher(code_line);
+        if (matcher.find()) {
+            String key = matcher.group(1);
+            String operator = matcher.group(2);
+            Object value;
+
+            // Assign value
+            try {
+                value = Long.valueOf(matcher.group(3));
+            } catch (NumberFormatException e) {
+                // if variable, assign its value
+                if (currentVariableMap.containsKey(matcher.group(3))) {
+                    value = currentVariableMap.get(matcher.group(3));
+                } else {
+                    // else boolean; Only false or true reaches this point.
+                    value = Boolean.valueOf(matcher.group(3));
+                }
+            }
+
+        } else {
+            System.out.println("Could not parseKeyValuePair"); // might make this throw an exception later
+        }
+    }
+
+    public static void runPrint(int index, List<String> currentLines, Map<String, Object> currentVariableMap) {
+        String printLine = currentLines.get(index).strip();
+        Matcher matcher = Statement.PRINT.getPattern().matcher(printLine);
+        String print = "";
+
+        if (matcher.find()) {
+            if (currentVariableMap.containsKey(matcher.group(1))){
+                print = currentVariableMap.get(matcher.group(1)).toString();
+            } else {
+                print = matcher.group(1);
+            }
+            System.out.println(print);
+        } else {
+            System.out.println("Invalid Print Statement"); // might become exception
+        }
+    }
+}
 
 enum Statement {
 
