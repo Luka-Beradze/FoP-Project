@@ -138,23 +138,6 @@ public class Interpreter {
             System.out.println("Could not parseKeyValuePair"); // might make this throw an exception later
         }
     }
-
-    public static void runPrint(int index, List<String> currentLines, Map<String, Object> currentVariableMap) {
-        String printLine = currentLines.get(index).strip();
-        Matcher matcher = Statement.PRINT.getPattern().matcher(printLine);
-        String print = "";
-
-        if (matcher.find()) {
-            if (currentVariableMap.containsKey(matcher.group(1))){
-                print = currentVariableMap.get(matcher.group(1)).toString();
-            } else {
-                print = matcher.group(1);
-            }
-            System.out.println(print);
-        } else {
-            System.out.println("Invalid Print Statement"); // might become exception
-        }
-    }
 }
 
 enum Statement {
