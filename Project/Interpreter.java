@@ -1,17 +1,17 @@
 package Project;
-
+ 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-
+ 
+ 
 public class Interpreter {
-
+ 
     private static final String algorithm = "src/Algorithms/SumOfN.txt";
-
+ 
     public static Path path = Path.of(algorithm);
     public static List<String> lines;
     static {
@@ -21,13 +21,13 @@ public class Interpreter {
             throw new RuntimeException(e);
         }
     }
-
+ 
     public static Stack<String> runningStack = new Stack<>();
     public static Map<String, Object> variableMap = new HashMap<>();
-
+ 
     public static void main(String[] args){
-
-
+ 
+ 
         for (int i = lines.size() - 1; i >= 0; i--) {
             String line = lines.get(i);
             if (Statement.addToStack(line)) {
@@ -35,12 +35,12 @@ public class Interpreter {
             }
         }
         System.out.println(runningStack);
-
+ 
         runAlgorithm(lines, runningStack, variableMap); // run's algorithm
     }
-
+ 
     private static void runAlgorithm(List<String> currentLines, Stack<String> currentRunningStack, Map<String, Object> currentVariableMap) {
-
+ 
         while (!currentRunningStack.empty()){
             switch (Statement.getStatement(currentRunningStack.getLast())){
                 case null:
@@ -64,6 +64,10 @@ public class Interpreter {
                     currentRunningStack.pop();
                     break;
                 case PRINT:
+                    int indexPrint = currentLines.indexOf(currentRunningStack.getLast());
+ 
+                    runPrint(indexPrint, currentLines, currentVariableMap);
+ 
                     currentRunningStack.pop();
                     break;
                 case SCOPE:
@@ -75,15 +79,15 @@ public class Interpreter {
             }
         }
     }
-
-
+ 
+ 
     public static void parseKeyValuePair(String code_line, Map<String, Object> currentVariableMap) {
         Matcher matcher = Statement.ASSIGNMENT.getPattern().matcher(code_line);
         if (matcher.find()) {
             String key = matcher.group(1);
             String operator = matcher.group(2);
             Object value;
-
+ 
             // Assign value
             try {
                 value = Long.valueOf(matcher.group(3));
@@ -96,12 +100,11 @@ public class Interpreter {
                     value = Boolean.valueOf(matcher.group(3));
                 }
             }
-
+ 
             // Handle compound assignment operators
             if (currentVariableMap.containsKey(key) && value instanceof Long) {
                 Long currentValue = (Long) currentVariableMap.get(key);
                 Long numericValue = (Long) value;
- 
                 switch (operator) {
                     case "+=":
                         currentVariableMap.put(key, currentValue + numericValue);
@@ -138,10 +141,27 @@ public class Interpreter {
             System.out.println("Could not parseKeyValuePair"); // might make this throw an exception later
         }
     }
+ 
+    public static void runPrint(int index, List<String> currentLines, Map<String, Object> currentVariableMap) {
+        String printLine = currentLines.get(index).strip();
+        Matcher matcher = Statement.PRINT.getPattern().matcher(printLine);
+        String print = "";
+ 
+        if (matcher.find()) {
+            if (currentVariableMap.containsKey(matcher.group(1))){
+                print = currentVariableMap.get(matcher.group(1)).toString();
+            } else {
+                print = matcher.group(1);
+            }
+            System.out.println(print);
+        } else {
+            System.out.println("Invalid Print Statement"); // might become exception
+        }
+    }
 }
-
+ 
 enum Statement {
-
+ 
     ASSIGNMENT("([a-z_][a-zA-Z0-9_]*)\\s*(\\+=|-=|\\*=|\\/=|=|%=|=)\\s*(\\d+|true|false|[a-z_][a-zA-Z0-9_]*)$"),
     // ASSIGNMENT Group 1: Variable Name; Group 2: Operator; Group 3: Variable Value;
     IF("if .*"),
@@ -153,21 +173,21 @@ enum Statement {
     // PRINT Group 1: item to print out;
     SCOPE("  .*"),
     EMPTY("");
-
+ 
     private final Pattern pattern;
-
+ 
     Statement(String regex) {
         this.pattern = Pattern.compile(regex);
     }
-
+ 
     public Pattern getPattern() {
         return pattern;
     }
-
+ 
     public boolean matches(String code) {
         return pattern.matcher(code).find();
     }
-
+ 
     public static boolean addToStack(String code_line) {
         if (getStatement(code_line) == ASSIGNMENT ||
                 getStatement(code_line) == IF ||
@@ -179,8 +199,8 @@ enum Statement {
         }
         return false;
     }
-
-
+ 
+ 
     public static Statement getStatement(String code_line) {
         for (Statement s : values()) {
             if (Pattern.matches(s.pattern.toString(), code_line)) {
@@ -190,19 +210,19 @@ enum Statement {
         return null;
     }
 }
-
+ 
 enum Helper {
-
+ 
     CONDITION("([a-z_][a-zA-Z0-9_]*|\\d+)\\s*(==|!=|<=|>=|<|>)\\s*([a-z_][a-zA-Z0-9_]*|\\d+)$|true|false|[a-z_][a-zA-Z0-9_]*"),// Does not contain "!" before a condition
     // CONDITION Group 1: left operand; Group 2: comparator; Group 3: right operand.
     ASSIGNMENT_HELPER("\\+=|-=|\\*=|\\/=|=|%=|=");
-
+ 
     private final Pattern pattern;
-
+ 
     Helper(String regex) {
         this.pattern = Pattern.compile(regex);
     }
-
+ 
     public Pattern getPattern() {
         return pattern;
     }
