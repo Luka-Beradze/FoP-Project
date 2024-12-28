@@ -1,6 +1,7 @@
 # Contributions
 
 Contributions of each member might not be comprehensive, since each of us actively participated in initial planning, development and code style discussions which took place in teams chat and voice/video calls.
+
 On the way, each of us made fixes and minor changes to Interpreter code to ensure uninterrupted flow of the program.
 
 1. Luka Beradze:
