@@ -97,6 +97,43 @@ public class Interpreter {
                 }
             }
 
+            // Handle compound assignment operators
+            if (currentVariableMap.containsKey(key) && value instanceof Long) {
+                Long currentValue = (Long) currentVariableMap.get(key);
+                Long numericValue = (Long) value;
+ 
+                switch (operator) {
+                    case "+=":
+                        currentVariableMap.put(key, currentValue + numericValue);
+                        break;
+                    case "-=":
+                        currentVariableMap.put(key, currentValue - numericValue);
+                        break;
+                    case "*=":
+                        currentVariableMap.put(key, currentValue * numericValue);
+                        break;
+                    case "/=":
+                        if (numericValue != 0) {
+                            currentVariableMap.put(key, currentValue / numericValue);
+                        } else {
+                            throw new ArithmeticException("Division by zero");
+                        }
+                        break;
+                    case "%=":
+                        if (numericValue != 0) {
+                            currentVariableMap.put(key, currentValue % numericValue);
+                        } else {
+                            throw new ArithmeticException("Division by zero");
+                        }
+                        break;
+                    default: // Simple assignment
+                        currentVariableMap.put(key, value);
+                        break;
+                }
+            } else {
+                // Simple assignment for non-numeric values or if key doesn't exist
+                currentVariableMap.put(key, value);
+            }
         } else {
             System.out.println("Could not parseKeyValuePair"); // might make this throw an exception later
         }
