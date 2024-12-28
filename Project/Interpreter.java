@@ -35,3 +35,4 @@ public class Interpreter {
 
         runAlgorithm(lines, runningStack, variableMap); // run's algorithm
     }
+}
