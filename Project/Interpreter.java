@@ -35,4 +35,41 @@ public class Interpreter {
 
         runAlgorithm(lines, runningStack, variableMap); // run's algorithm
     }
+
+    private static void runAlgorithm(List<String> currentLines, Stack<String> currentRunningStack, Map<String, Object> currentVariableMap) {
+
+        while (!currentRunningStack.empty()){
+            switch (Statement.getStatement(currentRunningStack.getLast())){
+                case null:
+                    break;
+                case ASSIGNMENT:
+                    parseKeyValuePair(currentRunningStack.pop(), currentVariableMap);
+                    break;
+                case IF:
+                    currentRunningStack.pop();
+                    break;
+                case ELSE:
+                    currentRunningStack.pop();
+                    break;
+                case WHILE:
+                    currentRunningStack.pop();
+                    break;
+                case FOR:
+                    currentRunningStack.pop();
+                    break;
+                case END:
+                    currentRunningStack.pop();
+                    break;
+                case PRINT:
+                    currentRunningStack.pop();
+                    break;
+                case SCOPE:
+                    currentRunningStack.pop();
+                    break;
+                case EMPTY:
+                    currentRunningStack.pop();
+                    break;
+            }
+        }
+    }
 }
