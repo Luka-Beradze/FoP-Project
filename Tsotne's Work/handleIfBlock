@@ -1,1 +1,32 @@
+private static void handleIfBlock(Stack<String> currentRunningStack, List<String> currentLines, Map<String, Object> currentVariableMap) {
+    int blockStart = currentLines.indexOf(currentRunningStack.getLast()) + 1;
+    List<String> ifBlock = new ArrayList<>();
+
+    // Collect lines until the 'else' or 'end' statement
+    while (!currentLines.get(blockStart).strip().equals("else") && !currentLines.get(blockStart).strip().equals("end")) {
+        ifBlock.add(currentLines.get(blockStart));
+        blockStart++;
+    }
+
+    // Add the block to the stack for execution
+    for (int i = ifBlock.size() - 1; i >= 0; i--) {
+        currentRunningStack.push(ifBlock.get(i).strip());
+    }
+}
+
+private static void handleElseBlock(Stack<String> currentRunningStack, List<String> currentLines) {
+    int blockStart = currentLines.indexOf(currentRunningStack.getLast()) + 1;
+    List<String> elseBlock = new ArrayList<>();
+
+    // Collect the 'else' block lines
+    while (!currentLines.get(blockStart).strip().equals("end")) {
+        elseBlock.add(currentLines.get(blockStart));
+        blockStart++;
+    }
+
+    // Add the 'else' block to the stack for execution
+    for (int i = elseBlock.size() - 1; i >= 0; i--) {
+        currentRunningStack.push(elseBlock.get(i).strip());
+    }
+}
 
