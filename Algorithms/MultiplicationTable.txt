@@ -1,8 +1,0 @@
-num = 5
-i = 1
-
-while i <= 10
-  number = num*i
-  puts number
-  i += 1
-end
