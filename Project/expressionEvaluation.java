@@ -3,7 +3,7 @@ package Project;
 import java.util.Stack;
 
 public class expressionEvaluation {
-    public static Long evaluate(String expression) throws assignmentException {
+    public static Long evaluate(String expression) throws AssignmentExceptions {
         char[] tokens = expression.toCharArray();
 
         Stack<Integer> values = new Stack<Integer>();
@@ -12,7 +12,7 @@ public class expressionEvaluation {
         for (int i = 0; i < tokens.length; i++) {
             // Check for undefined variables
             if ((tokens[i] >= 'A' && tokens[i] <= 'Z') || (tokens[i] >= 'a' && tokens[i] <= 'z')) {
-                throw new assignmentException("Variable in a variable assignment expression {" + expression + "} is not defined!");
+                throw new AssignmentExceptions("Variable in a variable assignment expression {" + expression + "} is not defined!");
             }
 
             // Skip spaces
@@ -44,7 +44,7 @@ public class expressionEvaluation {
             }
             // Handle operators (+, -, *, /)
             else if (tokens[i] == '+' || tokens[i] == '-' ||
-                    tokens[i] == '*' || tokens[i] == '/') {
+                    tokens[i] == '*' || tokens[i] == '/' || tokens[i] == '%') {
                 while (!ops.empty() && hasPrecedence(tokens[i], ops.peek())) {
                     values.push(applyOp(ops.pop(), values.pop(), values.pop()));
                 }
@@ -56,7 +56,7 @@ public class expressionEvaluation {
         while (!ops.empty()) {
             values.push(applyOp(ops.pop(), values.pop(), values.pop()));
         }
-
+        // Return the evaluated value.
         return (long) values.pop();
     }
 
@@ -64,7 +64,7 @@ public class expressionEvaluation {
         if (op2 == '(' || op2 == ')') {
             return false;
         }
-        if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-')) {
+        if ((op1 == '*' || op1 == '/' || op1 == '%') && (op2 == '+' || op2 == '-')) {
             return false;
         }
         return true;
@@ -80,9 +80,14 @@ public class expressionEvaluation {
                 return a * b;
             case '/':
                 if (b == 0) {
-                    throw new UnsupportedOperationException("Cannot divide by zero");
+                    throw new ArithmeticException("Cannot divide by zero");
                 }
                 return a / b;
+            case '%':
+                if (b == 0) {
+                    throw new ArithmeticException("Cannot divide by zero");
+                }
+                return a % b;
         }
         return 0;
     }
