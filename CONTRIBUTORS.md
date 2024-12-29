@@ -12,12 +12,12 @@ On the way, each of us made fixes and minor changes to Interpreter code to ensur
    Played their role in Arithmetic operation handler implementation.  
    Updates in github (README.md, Develop Brench).  
 3. Giorgi Kveliashvili:  
-   ruby implementations of 10 test algorithms.  
+   Ruby implementations of 10 test algorithms.  
    Initial blueprint and implementation of interpreter memory system and runAlgorithm() method.  
    Added code description comments.  
    Played their role in Arithmetic operation handler implementation.  
    Implemented Custom Errors handling.  
-   Updates in github (CONTRIBUTORS.md, Develop Brench).  
+   Updates in github (README.md, Develop Brench).  
 5. Tsotne Tsutskiridze:  
    Implemented createWhileLoop class and methods to run ruby's while loop.  
    Added code description comments.  
