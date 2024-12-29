@@ -1,0 +1,17 @@
+num = 13
+is_prime = true
+i = 2
+
+if num <= 1
+  is_prime = false
+else
+  while i < num
+    temp = num % i
+    if temp == 0
+      is_prime = false
+    end
+    i += 1
+  end
+end
+
+puts is_prime

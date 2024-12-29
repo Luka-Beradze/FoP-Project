@@ -1,0 +1,12 @@
+num = 3947
+largest_digit = 0
+
+while num != 0
+  digit = num % 10
+  if digit > largest_digit
+    largest_digit = digit
+  end
+  num /= 10
+end
+
+puts largest_digit

@@ -1,0 +1,11 @@
+num = 1234
+reversed = 0
+
+while num != 0
+  digit = num % 10
+  reversed *= 10
+  reversed += digit
+  num /= 10
+end
+
+puts reversed
