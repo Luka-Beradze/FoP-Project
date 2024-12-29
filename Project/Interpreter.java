@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.script.*;
 
 public class Interpreter {
 
@@ -25,7 +24,7 @@ public class Interpreter {
     public static Stack<String> runningStack = new Stack<>();
     public static Map<String, Object> variableMap = new HashMap<>();
 
-    public static void main(String[] args) throws assignmentException{
+    public static void main(String[] args) throws CustomExceptions, SyntaxError{
 
         for (int i = lines.size() - 1; i >= 0; i--) {
             String line = lines.get(i);
@@ -38,7 +37,7 @@ public class Interpreter {
         runAlgorithm(lines, runningStack, variableMap); // run's algorithm
     }
 
-    private static void runAlgorithm(List<String> currentLines, Stack<String> currentRunningStack, Map<String, Object> currentVariableMap) throws assignmentException{
+    private static void runAlgorithm(List<String> currentLines, Stack<String> currentRunningStack, Map<String, Object> currentVariableMap) throws CustomExceptions, SyntaxError{
 
         while (!currentRunningStack.empty()){
             switch (Statement.getStatement(currentRunningStack.getLast())){
@@ -89,8 +88,71 @@ public class Interpreter {
             }
         }
     }
-    
-    public static void parseKeyValuePair(String code_line, Map<String, Object> currentVariableMap) throws assignmentException{
+
+
+//    public static void parseKeyValuePair(String code_line, Map<String, Object> currentVariableMap) {
+//        Matcher matcher = Statement.ASSIGNMENT.getPattern().matcher(code_line);
+//        if (matcher.find()) {
+//            String key = matcher.group(1);
+//            String operator = matcher.group(2);
+//            Object value;
+//
+//            // Assign value
+//            try {
+//                value = Long.valueOf(matcher.group(3));
+//            } catch (NumberFormatException e) {
+//                // if variable, assign its value
+//                if (currentVariableMap.containsKey(matcher.group(3))) {
+//                    value = currentVariableMap.get(matcher.group(3));
+//                } else {
+//                    // else boolean; Only false or true reaches this point.
+//                    value = Boolean.valueOf(matcher.group(3));
+//                }
+//            }
+//
+//            // Handle compound assignment operators
+//            if (currentVariableMap.containsKey(key) && value instanceof Long) {
+//                Long currentValue = (Long) currentVariableMap.get(key);
+//                Long numericValue = (Long) value;
+//
+//                switch (operator) {
+//                    case "+=":
+//                        currentVariableMap.put(key, currentValue + numericValue);
+//                        break;
+//                    case "-=":
+//                        currentVariableMap.put(key, currentValue - numericValue);
+//                        break;
+//                    case "*=":
+//                        currentVariableMap.put(key, currentValue * numericValue);
+//                        break;
+//                    case "/=":
+//                        if (numericValue != 0) {
+//                            currentVariableMap.put(key, currentValue / numericValue);
+//                        } else {
+//                            throw new ArithmeticException("Division by zero");
+//                        }
+//                        break;
+//                    case "%=":
+//                        if (numericValue != 0) {
+//                            currentVariableMap.put(key, currentValue % numericValue);
+//                        } else {
+//                            throw new ArithmeticException("Division by zero");
+//                        }
+//                        break;
+//                    default: // Simple assignment
+//                        currentVariableMap.put(key, value);
+//                        break;
+//                }
+//            } else {
+//                // Simple assignment for non-numeric values or if key doesn't exist
+//                currentVariableMap.put(key, value);
+//            }
+//        } else {
+//            System.out.println("Could not parseKeyValuePair"); // might make this throw an exception later
+//        }
+//    }
+
+    public static void parseKeyValuePair(String code_line, Map<String, Object> currentVariableMap) throws CustomExceptions {
         Matcher matcher = Statement.ASSIGNMENT.getPattern().matcher(code_line);
         if (matcher.find()) {
             String key = matcher.group(1);
@@ -198,7 +260,7 @@ public class Interpreter {
 
         int indexWhile;
 
-        createWhileLoop(int index, List<String> currentLines, Map<String, Object> currentVariableMap) throws assignmentException{
+        createWhileLoop(int index, List<String> currentLines, Map<String, Object> currentVariableMap) throws CustomExceptions, SyntaxError {
             indexWhile = index;
             whileVariableMap.putAll(currentVariableMap);
             int i = index + 1; // get next line after while
@@ -304,7 +366,7 @@ enum Statement {
         return pattern.matcher(code).find();
     }
 
-    public static boolean addToStack(String code_line) {
+    public static boolean addToStack(String code_line) throws SyntaxError{
         if (getStatement(code_line) == ASSIGNMENT ||
                 getStatement(code_line) == IF ||
                 getStatement(code_line) == WHILE ||
@@ -317,13 +379,13 @@ enum Statement {
     }
 
 
-    public static Statement getStatement(String code_line) {
+    public static Statement getStatement(String code_line) throws SyntaxError{
         for (Statement s : values()) {
             if (Pattern.matches(s.pattern.toString(), code_line)) {
                 return s;
             }
         }
-        return null;
+        throw new SyntaxError("Invalid Syntax at: " + code_line);
     }
 }
 
@@ -343,3 +405,5 @@ enum Helper {
         return pattern;
     }
 }
+
+
