@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// Main body of an interpreter program.
 public class Interpreter {
 
     private static final String algorithm = "src/Algorithms/SumOfN.txt"; // Points to a file containing the Ruby algorithm to be interpreted.
