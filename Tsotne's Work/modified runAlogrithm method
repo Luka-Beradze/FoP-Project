@@ -61,15 +61,3 @@ case ELSE:
 }
 
 
-private static int findElseIndex(List<String> lines, int ifIndex) {
-    for (int i = ifIndex + 1; i < lines.size(); i++) {
-        String line = lines.get(i).strip();
-        if (line.equals("else")) {
-            return i;
-        } else if (line.equals("end")) {
-            break;
-        }
-    }
-    return -1; // No `else` found
-}
-
