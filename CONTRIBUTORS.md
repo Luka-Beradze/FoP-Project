@@ -10,17 +10,21 @@ On the way, each of us made fixes and minor changes to Interpreter code to ensur
    Implementation of parseKeyValuePair() method.  
    Ensures compound assigment operators are handled correctly in parseKeyValuePair().  
    Played their role in Arithmetic operation handler implementation.  
+   Updates in github (README.md, Develop Brench).  
 3. Giorgi Kveliashvili:  
    ruby implementations of 10 test algorithms.  
    Initial blueprint and implementation of interpreter memory system and runAlgorithm() method.  
    Added code description comments.  
    Played their role in Arithmetic operation handler implementation.  
    Implemented Custom Errors handling.  
+   Updates in github (CONTRIBUTORS.md, Develop Brench).  
 5. Tsotne Tsutskiridze:  
    Implemented createWhileLoop class and methods to run ruby's while loop.  
    Added code description comments.  
    Played their role in if and else statement runner implementation.  
-6. Ana Kakhidze:  
+   Updates in github (Develop Brench).  
+7. Ana Kakhidze:  
    Implemented runPrint() method to run ruby's "puts" function.  
    Played their role in else statement runner implementation.  
    Updates to the Implementation of Conditions Handler.  
+   Updates in github (Develop Brench).  
