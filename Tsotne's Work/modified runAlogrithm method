@@ -60,25 +60,7 @@ case ELSE:
     }
 }
 
-private static List<String> extractBlock(List<String> lines, int startIndex) {
-    List<String> block = new ArrayList<>();
-    int indentationLevel = 0;
 
-    for (int i = startIndex + 1; i < lines.size(); i++) {
-        String line = lines.get(i).strip();
-
-        if (line.equals("end") && indentationLevel == 0) {
-            break; // End of block
-        } else if (line.equals("if") || line.equals("else")) {
-            indentationLevel++;
-        } else if (line.equals("end")) {
-            indentationLevel--;
-        }
-
-        block.add(line);
-    }
-    return block;
-}
 private static int findElseIndex(List<String> lines, int ifIndex) {
     for (int i = ifIndex + 1; i < lines.size(); i++) {
         String line = lines.get(i).strip();
