@@ -1,9 +1,9 @@
 package Project;
 
 // define an assignment exception
-class CustomExceptions extends Exception{
+class AssignmentExceptions extends Exception{
 
-    public CustomExceptions(String message) {
+    public AssignmentExceptions(String message) {
         super(message);
     }
 }
