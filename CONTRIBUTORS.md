@@ -4,7 +4,7 @@ Contributions of each member might not be comprehensive, since each of us active
 Overall, the workflow of each member was equally significant to the project's success.
 
 On the way, each of us made fixes and minor changes to Interpreter code to ensure uninterrupted flow of the program.  
-(So all contributions might not be extensively recorded).
+(So all contributions might not be explicitly recorded).
 
 1. Luka Beradze:  
    Implementation of parseKeyValuePair() method.  
