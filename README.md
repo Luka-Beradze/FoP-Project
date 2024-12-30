@@ -35,7 +35,7 @@ User feeds text file consisting of Ruby code to the Interpreter. Our program rea
    > $ 7  
    > $ true
     
-3. **if/else** statements work, don't forget to end the scope using **end** keyword. *if* condition along with comparators, also support boolean variable and raw boolean.
+3. **if/else** statements work, don't forget to end the scope using **end** keyword. *if* condition along with comparators (==, >, >=, <, <=), also support boolean variable and raw boolean.
    ```
    if a < b  
      c -= b
@@ -46,7 +46,7 @@ User feeds text file consisting of Ruby code to the Interpreter. Our program rea
    puts c
    ```
    > $ 13
-4. For iterations use **while** loop, which also ends with **end** keyword. *while* loop condition along with comparators, also support boolean variable and raw boolean.
+4. For iterations use **while** loop, which also ends with **end** keyword. *while* loop condition along with comparators (==, >, >=, <, <=), also support boolean variable and raw boolean.
    ```
    b = a + 4
    while a < b
