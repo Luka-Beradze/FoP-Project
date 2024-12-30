@@ -66,7 +66,7 @@ outer_scope
 ```
 
 # User Guide
-To use our Ruby Interpreter: Run the Interpreter.java file; it'll prompt u for an address of a file; paste the address of a text file containing Ruby code in the terminal and press Enter.  
+**To use our Ruby Interpreter:** Run the **Interpreter.java** file (*in src/Project/ directory*); it'll prompt u for an address of a file; paste the address of a text file containing Ruby code in the terminal and press Enter.  
 Example:
 > ` Enter an address of a Ruby algorithm text file: `
 > 
