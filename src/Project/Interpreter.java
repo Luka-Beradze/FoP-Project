@@ -10,24 +10,39 @@ import java.util.regex.Pattern;
 // Main body of an Interpreter.
 public class Interpreter {
 
-    private static final String algorithm = "// TODO: paste here the address of an algorithm text file"; // Points to a file containing the Ruby algorithm to be interpreted.
-
-    public static Path path = Path.of(algorithm); // creates a Path object pointing to the file.
-    public static List<String> lines;
-    //This file is read and stored in a list called "lines".
-    static {
-        try {
-            lines = Files.readAllLines(path);
-        } catch (IOException e) {
-            throw new RuntimeException(e); // An error will occur if pointed file does not exist or cannot be opened.
-        }
-    }
-    // A stack that stores code lines to be executed.
-    public static Stack<String> runningStack = new Stack<>();
-    // A map which stores variable names and their values for the ruby code.
-    public static Map<String, Object> variableMap = new HashMap<>();
-
     public static void main(String[] args) throws AssignmentExceptions, SyntaxError{
+
+        Scanner scanner = new Scanner(System.in);
+        // Prompt the user for address of a file containing the Ruby algorithm.
+        System.out.println("Enter an address of a Ruby algorithm text file:");
+
+        // Read the entire line
+        String algorithm = scanner.nextLine(); // Points to a file containing the Ruby algorithm to be interpreted.
+
+        Path path = Path.of(algorithm); // creates a Path object pointing to the file.
+        List<String> lines = new ArrayList<>();
+        // This file is read and stored in a list called "lines".
+        {
+            try {
+                lines = Files.readAllLines(path);
+            } catch (IOException e) {
+                // An error will occur if pointed file does not exist or cannot be opened.
+                System.out.println("- Please input a valid address of a text file");
+                // User will be prompted to provide an address again.
+                main(args);
+                return;
+            }
+        }
+        // Print Running: algorithm (for aesthetics)
+        System.out.println("Running: " + algorithm);
+        // print line output: (for aesthetics)
+        System.out.println("Output: ");
+
+        // A stack that stores code lines to be executed.
+        Stack<String> runningStack = new Stack<>();
+        // A map which stores variable names and their values for the ruby code.
+        Map<String, Object> variableMap = new HashMap<>();
+
         // Iterate over lines.
         for (int i = lines.size() - 1; i >= 0; i--) {
             String line = lines.get(i);
