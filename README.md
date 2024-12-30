@@ -74,3 +74,6 @@ Example:
   
 We *recommend* using **(tester should use)** our algorithm text files from *src/Algorithms* directory containing 10 Ruby Algorithms (given by university in the project guide) that we implemented for **Testing**.
    
+### Video Guide  
+
+https://github.com/user-attachments/assets/b14b772a-304d-4d12-bc23-c935b2b413a1
