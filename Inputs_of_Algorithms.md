@@ -1,7 +1,7 @@
 # Inputs And Expected Outputs Of Our Provided Ruby Algorithms:
 
 (inputs are the same as the example inputs that Professor Zaal provided for these 10 algorithms)  
-User can change input variables (*in the first line(s) of code in text files*) to their desired value and our Interpreter will execute them properly.
+User **can** change input variable values (*in the first line(s) of code in text files*) to their desired value and our Interpreter will execute them properly.
 
 1. **Sum of First n Numbers:**  
    Input: n = 10  
