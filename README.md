@@ -76,4 +76,4 @@ We *recommend* using **(tester should use)** our algorithm text files from *src/
    
 ### Video Guide  
 
-https://github.com/user-attachments/assets/b14b772a-304d-4d12-bc23-c935b2b413a1
+https://github.com/user-attachments/assets/a42570f3-9d0b-45d2-b54a-df1d23d0b6e8
