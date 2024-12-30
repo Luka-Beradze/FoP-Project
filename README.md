@@ -66,8 +66,11 @@ outer_scope
 ```
 
 # User Guide
-To use our Ruby Interpreter, paste the address of text file containing Ruby code inbetween aphostropes in Interpreter.java's algorithm variable value in the start of "public class Interpreter":  
-> On this line: ` private static final String algorithm = "// TODO: paste here the adress of an algorithm text file"; `
+To use our Ruby Interpreter: Run the Interpreter.java file; it'll prompt u for an address of a file; paste the address of a text file containing Ruby code in the terminal and press Enter.  
+Example:
+> ` Enter an address of a Ruby algorithm text file: `
+> 
+> ` Algorithms/SumOfN.txt `
   
-We **recommend** using our algorithm text files from src/Algorithms folder containing 10 Ruby Algorithms (given by university in the project guide) that we implemented for **Testing**.
+We *recommend* using **(tester should use)** our algorithm text files from src/Algorithms folder containing 10 Ruby Algorithms (given by university in the project guide) that we implemented for **Testing**.
    
