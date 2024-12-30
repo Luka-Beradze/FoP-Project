@@ -25,7 +25,7 @@ User feeds text file consisting of Ruby code to the Interpreter. Our program rea
    boolean_example = true
    c = (a + b) / 3
    ```
-2. To print out a value/number, use **puts** keyword, just like in ruby  
+2. To print out a value/number, use **puts** keyword, as in Ruby.  
    ```  
    puts 5
    puts c
