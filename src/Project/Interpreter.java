@@ -20,7 +20,7 @@ public class Interpreter {
         String algorithm = scanner.nextLine(); // Points to a file containing the Ruby algorithm to be interpreted.
 
         Path path = Path.of(algorithm); // creates a Path object pointing to the file.
-        List<String> lines = new ArrayList<>();
+        List<String> lines;
         // This file is read and stored in a list called "lines".
         {
             try {
