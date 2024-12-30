@@ -72,5 +72,5 @@ Example:
 > 
 > ` Algorithms/SumOfN.txt `
   
-We *recommend* using **(tester should use)** our algorithm text files from src/Algorithms folder containing 10 Ruby Algorithms (given by university in the project guide) that we implemented for **Testing**.
+We *recommend* using **(tester should use)** our algorithm text files from *src/Algorithms* directory containing 10 Ruby Algorithms (given by university in the project guide) that we implemented for **Testing**.
    
