@@ -1,5 +1,4 @@
-# FoP-Project
-
+# FoP-Project: Ruby Interpreter in Java
 ### Members of the group:
 - Luka Beradze
 - Giorgi Kveliashvili
